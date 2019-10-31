@@ -81,7 +81,22 @@ subprojects {
 
     metacatVersion = '1.3.6'
 
+    upstreamVersion = '0.7.0'
+
     relocationPrefix = 'org.apache.iceberg.bdp.shaded'
+  }
+
+  afterEvaluate {
+    publishing {
+      publications {
+        withType(IvyPublication) {
+          module = "${project.name}-${upstreamVersion}"
+        }
+        withType(MavenPublication) {
+          artifactId = "${project.name}-${upstreamVersion}"
+        }
+      }
+    }
   }
 
   sourceCompatibility = '1.8'
